@@ -4,7 +4,7 @@ This is a simple app that switches your wallpaper depending on if you're in ligh
 
 How to use:
 
-* Download the .zip file in the repo, unzip and run it
+* Download the app [here](https://github.com/jwhamilton99/dark-mode-wallpaper/releases)
 * Put 2 images (must be JPEGs, sorry) in the app's folder, "light.jpg" and "dark.jpg"
 * Switch your appearance
 
