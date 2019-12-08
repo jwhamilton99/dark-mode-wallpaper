@@ -192,6 +192,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    @IBAction func goToWebsite(_ sender: Any) {
+        NSWorkspace.shared.open(URL(string:"https://www.jwhamilton.co")!)
+    }
+    
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }

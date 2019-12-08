@@ -680,11 +680,11 @@
             </items>
             <point key="canvasLocation" x="140" y="154"/>
         </menu>
-        <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
+        <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="250" height="300"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="250" height="271"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -714,7 +714,7 @@
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lO2-Am-NsG">
                         <rect key="frame" x="18" y="20" width="214" height="13"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="v1.0.1" id="pRH-HR-EKb">
+                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="v1.0.2" id="pRH-HR-EKb">
                             <font key="font" metaFont="system" size="10"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -722,9 +722,16 @@
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WGG-08-Mcy">
                         <rect key="frame" x="18" y="38" width="214" height="16"/>
+                        <gestureRecognizers>
+                            <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="efW-BU-9V2">
+                                <connections>
+                                    <action selector="goToWebsite:" target="Voe-Tx-rLC" id="yQ3-0b-MXf"/>
+                                </connections>
+                            </clickGestureRecognizer>
+                        </gestureRecognizers>
                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="jwhamilton.co" id="J61-m1-r0W">
                             <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="linkColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
