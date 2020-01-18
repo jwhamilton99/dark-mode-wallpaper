@@ -19,6 +19,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     let lightIcon = NSImage(named: "lightIcon")
     let darkIcon = NSImage(named: "darkIcon")
+    
+    var darkExt = ""
+    var lightExt = ""
+    var currentExt = ""
 
     var suffResources = true
     
@@ -37,17 +41,45 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             print(error.localizedDescription)
         }
         
+        if(UserDefaults.standard.string(forKey: "darkExtension") != nil) {
+            self.darkExt = UserDefaults.standard.string(forKey: "darkExtension")!
+        } else {
+            self.darkExt = "jpg"
+            UserDefaults.standard.set(self.darkExt, forKey: "darkExtension")
+        }
+        
+        if(UserDefaults.standard.string(forKey: "lightExtension") != nil) {
+            self.lightExt = UserDefaults.standard.string(forKey: "lightExtension")!
+        } else {
+            self.lightExt = "jpg"
+            UserDefaults.standard.set(self.lightExt, forKey: "lightExtension")
+        }
+        
+        if(UserDefaults.standard.string(forKey: "currentExtension") != nil) {
+            self.currentExt = UserDefaults.standard.string(forKey: "currentExtension")!
+        } else {
+            self.currentExt = "jpg"
+            UserDefaults.standard.set(self.currentExt, forKey: "currentExtension")
+        }
+        
         picURL = supportURL[0].appendingPathComponent("DarkModeWallpaper/wallpaper-images", isDirectory: true) as NSURL
         rawDataURL = supportURL[0].appendingPathComponent("DarkModeWallpaper/rawdata", isDirectory: true) as NSURL
         
         checkSuffResources(showAlert: true)
         
         let menu = NSMenu()
-        menu.addItem(withTitle: "Open Wallpaper Folder", action: #selector(self.openFolder), keyEquivalent: "")
+        
+        let replaceItem = NSMenuItem(title: "Pick Images...", action: nil, keyEquivalent: "")
+        let imagesSubmenu = NSMenu()
+        imagesSubmenu.addItem(withTitle: "Light", action: #selector(self.chooseLight), keyEquivalent: "")
+        imagesSubmenu.addItem(withTitle: "Dark", action: #selector(self.chooseDark), keyEquivalent: "")
+        replaceItem.submenu = imagesSubmenu
+        
+        menu.addItem(replaceItem)
         menu.addItem(withTitle: "Open At Login", action: #selector(self.openAtLogin), keyEquivalent: "")
         menu.addItem(NSMenuItem.separator())
+        menu.addItem(withTitle: "Open Wallpaper Folder", action: #selector(self.openFolder), keyEquivalent: "")
         menu.addItem(withTitle: "About", action: #selector(self.showAbout), keyEquivalent: "")
-        menu.addItem(withTitle: "How To Use", action: #selector(self.howToUse), keyEquivalent: "")
         menu.addItem(withTitle: "Quit", action: #selector(self.quit), keyEquivalent: "")
         statusItem.menu = menu
         
@@ -57,37 +89,102 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         interfaceModeChanged()
     }
     
+    @objc func chooseLight() {
+        let dialog = NSOpenPanel()
+        dialog.prompt = "Set Light Wallpaper"
+        dialog.showsResizeIndicator = true
+        dialog.showsHiddenFiles = false
+        dialog.allowsMultipleSelection = false
+        dialog.canChooseDirectories = false
+        dialog.allowedFileTypes = ["public.image"]
+        dialog.directoryURL = FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask)[0]
+        
+        if(dialog.runModal() == NSApplication.ModalResponse.OK) {
+            let result = dialog.url
+            if(result != nil) {
+                do {
+                    let oldExt = self.lightExt
+                    if(FileManager.default.fileExists(atPath: picURL.appendingPathComponent("light.\(oldExt)", isDirectory: false)!.relativePath)) {
+                        try FileManager.default.removeItem(at: picURL.appendingPathComponent("light.\(oldExt)", isDirectory: false)!)
+                    }
+                    self.lightExt = result!.pathExtension
+                    try FileManager.default.copyItem(at: result!, to: picURL.appendingPathComponent("light.\(self.lightExt)", isDirectory: false)!)
+                    UserDefaults.standard.set(self.lightExt, forKey: "lightExtension")
+                    self.interfaceModeChanged()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        } else {
+            return
+        }
+    }
+    
+    @objc func chooseDark() {
+        let dialog = NSOpenPanel()
+        dialog.prompt = "Set Dark Wallpaper"
+        dialog.showsResizeIndicator = true
+        dialog.showsHiddenFiles = false
+        dialog.allowsMultipleSelection = false
+        dialog.canChooseDirectories = false
+        dialog.allowedFileTypes = ["public.image"]
+        dialog.directoryURL = FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask)[0]
+        
+        if(dialog.runModal() == NSApplication.ModalResponse.OK) {
+            let result = dialog.url
+            if(result != nil) {
+                do {
+                    let oldExt = self.darkExt
+                    if(FileManager.default.fileExists(atPath: picURL.appendingPathComponent("dark.\(oldExt)", isDirectory: false)!.relativePath)) {
+                        try FileManager.default.removeItem(at: picURL.appendingPathComponent("dark.\(oldExt)", isDirectory: false)!)
+                    }
+                    self.darkExt = result!.pathExtension
+                    try FileManager.default.copyItem(at: result!, to: picURL.appendingPathComponent("dark.\(self.darkExt)", isDirectory: false)!)
+                    UserDefaults.standard.set(self.darkExt, forKey: "darkExtension")
+                    self.interfaceModeChanged()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        } else {
+            return
+        }
+    }
+    
     func checkSuffResources(showAlert: Bool) {
         suffResources = true
-        if(!FileManager.default.fileExists(atPath: picURL.appendingPathComponent("dark.jpg")!.relativePath) && !FileManager.default.fileExists(atPath: picURL.appendingPathComponent("light.jpg")!.relativePath)) {
+        if(!FileManager.default.fileExists(atPath: picURL.appendingPathComponent("dark.\(self.darkExt)")!.relativePath) && !FileManager.default.fileExists(atPath: picURL.appendingPathComponent("light.\(self.lightExt)")!.relativePath)) {
             suffResources = false
             if(showAlert) {
                 let alert = NSAlert()
                 alert.icon = NSImage(named: "AppIcon")
-                alert.messageText = "Missing light and dark wallpapers. Please move images into the folder.\n\n(Images titled \"light.jpg\" and \"dark.jpg\" are required. It has to be a JPEG, sorry.)"
+                alert.messageText = "Missing light wallpaper.\n\nPlease pick an image."
                 alert.addButton(withTitle: "OK")
                 alert.runModal()
-                self.openFolder()
+                self.chooseLight()
+                alert.messageText = "Missing dark wallpaper.\n\nPlease pick an image."
+                alert.runModal()
+                self.chooseDark()
             }
-        } else if(!FileManager.default.fileExists(atPath: picURL.appendingPathComponent("dark.jpg")!.relativePath)) {
+        } else if(!FileManager.default.fileExists(atPath: picURL.appendingPathComponent("dark.\(self.darkExt)")!.relativePath)) {
             suffResources = false
             if(showAlert) {
                 let alert = NSAlert()
                 alert.icon = NSImage(named: "AppIcon")
-                alert.messageText = "Missing dark wallpaper. Please move an image into the folder.\n\n(A file titled \"dark.jpg\" is required. It has to be a JPEG, sorry.)"
+                alert.messageText = "Missing dark wallpaper.\n\nPlease pick an image."
                 alert.addButton(withTitle: "OK")
                 alert.runModal()
-                self.openFolder()
+                self.chooseDark()
             }
-        } else if(!FileManager.default.fileExists(atPath: picURL.appendingPathComponent("light.jpg")!.relativePath)) {
+        } else if(!FileManager.default.fileExists(atPath: picURL.appendingPathComponent("light.\(self.lightExt)")!.relativePath)) {
             suffResources = false
             if(showAlert) {
                 let alert = NSAlert()
                 alert.icon = NSImage(named: "AppIcon")
-                alert.messageText = "Missing light wallpaper. Please move an image into the folder.\n\n(A file titled \"light.jpg\" is required. It has to be a JPEG, sorry.)"
+                alert.messageText = "Missing light wallpaper.\n\nPlease pick an image."
                 alert.addButton(withTitle: "OK")
                 alert.runModal()
-                self.openFolder()
+                self.chooseLight()
             }
         }
         
@@ -140,19 +237,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         UserDefaults.standard.set(rand, forKey: "randInt")
         
         do {
-            if(FileManager.default.fileExists(atPath: rawDataURL.appendingPathComponent("current\(oldRand).jpg", isDirectory: false)!.relativePath)) {
-                try FileManager.default.removeItem(at: rawDataURL.appendingPathComponent("current\(oldRand).jpg", isDirectory: false)!)
+            let oldExt = self.currentExt
+            if(FileManager.default.fileExists(atPath: rawDataURL.appendingPathComponent("current\(oldRand).\(oldExt)", isDirectory: false)!.relativePath)) {
+                try FileManager.default.removeItem(at: rawDataURL.appendingPathComponent("current\(oldRand).\(oldExt)", isDirectory: false)!)
             }
             
             if(NSApp.effectiveAppearance.name.rawValue == "NSAppearanceNameDarkAqua") {
-                let imgurl = NSURL.fileURL(withPath: picURL.appendingPathComponent("dark.jpg")!.relativePath)
-                try FileManager.default.copyItem(at: imgurl, to: rawDataURL.appendingPathComponent("current\(rand).jpg", isDirectory: false)!)
+                let imgurl = NSURL.fileURL(withPath: picURL.appendingPathComponent("dark.\(self.darkExt)")!.relativePath)
+                try FileManager.default.copyItem(at: imgurl, to: rawDataURL.appendingPathComponent("current\(rand).\(self.darkExt)", isDirectory: false)!)
+                
+                self.currentExt = self.darkExt
                 
                 statusItem.button!.image = darkIcon
             } else if(NSApp.effectiveAppearance.name.rawValue == "NSAppearanceNameAqua") {
-                let imgurl = NSURL.fileURL(withPath: picURL.appendingPathComponent("light.jpg")!.relativePath)
+                let imgurl = NSURL.fileURL(withPath: picURL.appendingPathComponent("light.\(self.lightExt)")!.relativePath)
+                try FileManager.default.copyItem(at: imgurl, to: rawDataURL.appendingPathComponent("current\(rand).\(self.lightExt)", isDirectory: false)!)
                 
-                try FileManager.default.copyItem(at: imgurl, to: rawDataURL.appendingPathComponent("current\(rand).jpg", isDirectory: false)!)
+                self.currentExt = self.lightExt
                 
                 statusItem.button!.image = lightIcon
             }
@@ -169,7 +270,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let rand = UserDefaults.standard.integer(forKey: "randInt")
         
         do {
-            let imgurl = NSURL.fileURL(withPath: rawDataURL.appendingPathComponent("current\(rand).jpg")!.relativePath)
+            let imgurl = NSURL.fileURL(withPath: rawDataURL.appendingPathComponent("current\(rand).\(self.currentExt)")!.relativePath)
+            UserDefaults.standard.set(self.currentExt, forKey: "currentExtension")
             
             try screens.forEach({(s) in
                 if(workspace.desktopImageURL(for: s) != imgurl) {

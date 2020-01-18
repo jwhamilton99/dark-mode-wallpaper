@@ -2,11 +2,9 @@
 
 This is a simple app that switches your wallpaper depending on if you're in light or dark mode.
 
-How to use:
+The latest release hosted here is old. Version 1.1 will be available on the Mac App Store soon. The source code hosted here is for the new version.
 
-* Download the app [here](https://github.com/jwhamilton99/dark-mode-wallpaper/releases)
-* Put 2 images (must be JPEGs, sorry) in the app's folder, "light.jpg" and "dark.jpg"
-* Switch your appearance
+For App Store reasons, you can view the privacy policy [here](placeholder://).
 
 A few caveats:
 
