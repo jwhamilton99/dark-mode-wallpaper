@@ -18,7 +18,7 @@ A few caveats:
 * Due to macOS limitations, I can't change every space's wallpaper at once. Therefore, when you switch spaces, it updates the wallpaper on that space.
 * It's a known bug that when updating the wallpaper using the same file URL that points to a different image, it doesn't use the updated image. I've created a workaround for this, and I wrote about it [here](https://medium.com/@jwhamilton99/updating-wallpaper-urls-in-swift-6b014792e8b).
 
-## v1.1 CHANGELOG
+## v1.1 Changelog
 
 New:
 
