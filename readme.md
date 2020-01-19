@@ -4,6 +4,11 @@ This is a simple app that switches your wallpaper depending on if you're in ligh
 
 Get it for free on the [Mac App Store](https://apps.apple.com/us/app/dark-mode-wallpaper-switcher/id1488154568).
 
+![screenshot1](/images/1.png)
+![screenshot2](/images/2.png)
+![screenshot3](/images/3.png)
+![screenshot4](/images/4.png)
+
 For App Store reasons, you can view the privacy policy [here](https://github.com/jwhamilton99/dark-mode-wallpaper/blob/master/privacypolicy.md).
 
 Made with love by [Justin Hamilton](https://www.jwhamilton.co/).
