@@ -10,7 +10,25 @@
 		434761AF237B799C00A9CD80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434761AE237B799C00A9CD80 /* AppDelegate.swift */; };
 		434761B1237B79A000A9CD80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 434761B0237B79A000A9CD80 /* Assets.xcassets */; };
 		434761B4237B79A000A9CD80 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 434761B2237B79A000A9CD80 /* MainMenu.xib */; };
+		4399B2D524100F2600C80A8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4399B2D424100F2600C80A8B /* AppDelegate.swift */; };
+		4399B2D924100F2900C80A8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4399B2D824100F2900C80A8B /* Assets.xcassets */; };
+		4399B2DC24100F2900C80A8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4399B2DA24100F2900C80A8B /* Main.storyboard */; };
+		4399B2E4241010C700C80A8B /* Dark Mode Wallpaper AutoLaunch.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4399B2D224100F2600C80A8B /* Dark Mode Wallpaper AutoLaunch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4399B2E7241010E000C80A8B /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4399B2E6241010E000C80A8B /* ServiceManagement.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4399B2E3241010BC00C80A8B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				4399B2E4241010C700C80A8B /* Dark Mode Wallpaper AutoLaunch.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		434761AB237B799C00A9CD80 /* Dark Mode Wallpaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dark Mode Wallpaper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -19,10 +37,25 @@
 		434761B3237B79A000A9CD80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		434761B5237B79A000A9CD80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		434761B6237B79A000A9CD80 /* Dark_Mode_Wallpaper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dark_Mode_Wallpaper.entitlements; sourceTree = "<group>"; };
+		4399B2D224100F2600C80A8B /* Dark Mode Wallpaper AutoLaunch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dark Mode Wallpaper AutoLaunch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4399B2D424100F2600C80A8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4399B2D824100F2900C80A8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4399B2DB24100F2900C80A8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4399B2DD24100F2900C80A8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4399B2DE24100F2900C80A8B /* Dark_Mode_Wallpaper_AutoLaunch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dark_Mode_Wallpaper_AutoLaunch.entitlements; sourceTree = "<group>"; };
+		4399B2E6241010E000C80A8B /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		434761A8237B799C00A9CD80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4399B2E7241010E000C80A8B /* ServiceManagement.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4399B2CF24100F2600C80A8B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -36,7 +69,9 @@
 			isa = PBXGroup;
 			children = (
 				434761AD237B799C00A9CD80 /* Dark Mode Wallpaper */,
+				4399B2D324100F2600C80A8B /* Dark Mode Wallpaper AutoLaunch */,
 				434761AC237B799C00A9CD80 /* Products */,
+				4399B2E5241010E000C80A8B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -44,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				434761AB237B799C00A9CD80 /* Dark Mode Wallpaper.app */,
+				4399B2D224100F2600C80A8B /* Dark Mode Wallpaper AutoLaunch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,6 +96,26 @@
 			path = "Dark Mode Wallpaper";
 			sourceTree = "<group>";
 		};
+		4399B2D324100F2600C80A8B /* Dark Mode Wallpaper AutoLaunch */ = {
+			isa = PBXGroup;
+			children = (
+				4399B2D424100F2600C80A8B /* AppDelegate.swift */,
+				4399B2D824100F2900C80A8B /* Assets.xcassets */,
+				4399B2DA24100F2900C80A8B /* Main.storyboard */,
+				4399B2DD24100F2900C80A8B /* Info.plist */,
+				4399B2DE24100F2900C80A8B /* Dark_Mode_Wallpaper_AutoLaunch.entitlements */,
+			);
+			path = "Dark Mode Wallpaper AutoLaunch";
+			sourceTree = "<group>";
+		};
+		4399B2E5241010E000C80A8B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4399B2E6241010E000C80A8B /* ServiceManagement.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -70,6 +126,7 @@
 				434761A7237B799C00A9CD80 /* Sources */,
 				434761A8237B799C00A9CD80 /* Frameworks */,
 				434761A9237B799C00A9CD80 /* Resources */,
+				4399B2E3241010BC00C80A8B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -80,18 +137,38 @@
 			productReference = 434761AB237B799C00A9CD80 /* Dark Mode Wallpaper.app */;
 			productType = "com.apple.product-type.application";
 		};
+		4399B2D124100F2600C80A8B /* Dark Mode Wallpaper AutoLaunch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4399B2DF24100F2900C80A8B /* Build configuration list for PBXNativeTarget "Dark Mode Wallpaper AutoLaunch" */;
+			buildPhases = (
+				4399B2CE24100F2600C80A8B /* Sources */,
+				4399B2CF24100F2600C80A8B /* Frameworks */,
+				4399B2D024100F2600C80A8B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Dark Mode Wallpaper AutoLaunch";
+			productName = "Dark Mode Wallpaper AutoLaunch";
+			productReference = 4399B2D224100F2600C80A8B /* Dark Mode Wallpaper AutoLaunch.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		434761A3237B799C00A9CD80 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1120;
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Justin Hamilton";
 				TargetAttributes = {
 					434761AA237B799C00A9CD80 = {
 						CreatedOnToolsVersion = 11.2.1;
+					};
+					4399B2D124100F2600C80A8B = {
+						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
 			};
@@ -109,6 +186,7 @@
 			projectRoot = "";
 			targets = (
 				434761AA237B799C00A9CD80 /* Dark Mode Wallpaper */,
+				4399B2D124100F2600C80A8B /* Dark Mode Wallpaper AutoLaunch */,
 			);
 		};
 /* End PBXProject section */
@@ -123,6 +201,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4399B2D024100F2600C80A8B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4399B2D924100F2900C80A8B /* Assets.xcassets in Resources */,
+				4399B2DC24100F2900C80A8B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -131,6 +218,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				434761AF237B799C00A9CD80 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4399B2CE24100F2600C80A8B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4399B2D524100F2600C80A8B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +238,14 @@
 				434761B3237B79A000A9CD80 /* Base */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		4399B2DA24100F2900C80A8B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4399B2DB24100F2900C80A8B /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -266,9 +369,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Dark Mode Wallpaper/Dark_Mode_Wallpaper.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 2W9EC9X76L;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Dark Mode Wallpaper/Info.plist";
@@ -276,7 +380,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "justinhamilton.Dark-Mode-Wallpaper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -288,9 +392,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Dark Mode Wallpaper/Dark_Mode_Wallpaper.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 2W9EC9X76L;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Dark Mode Wallpaper/Info.plist";
@@ -298,9 +403,55 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "justinhamilton.Dark-Mode-Wallpaper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		4399B2E024100F2900C80A8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Dark Mode Wallpaper AutoLaunch/Dark_Mode_Wallpaper_AutoLaunch.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2W9EC9X76L;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Dark Mode Wallpaper AutoLaunch/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "justinhamilton.Dark-Mode-Wallpaper-AutoLaunch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		4399B2E124100F2900C80A8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Dark Mode Wallpaper AutoLaunch/Dark_Mode_Wallpaper_AutoLaunch.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2W9EC9X76L;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Dark Mode Wallpaper AutoLaunch/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "justinhamilton.Dark-Mode-Wallpaper-AutoLaunch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -322,6 +473,15 @@
 			buildConfigurations = (
 				434761BA237B79A000A9CD80 /* Debug */,
 				434761BB237B79A000A9CD80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4399B2DF24100F2900C80A8B /* Build configuration list for PBXNativeTarget "Dark Mode Wallpaper AutoLaunch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4399B2E024100F2900C80A8B /* Debug */,
+				4399B2E124100F2900C80A8B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ServiceManagement
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -20,11 +21,46 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let lightIcon = NSImage(named: "lightIcon")
     let darkIcon = NSImage(named: "darkIcon")
     
+    var oldImage: NSImage!
+    var newImage: NSImage!
+    
     var darkExt = ""
     var lightExt = ""
     var currentExt = ""
 
     var suffResources = true
+    
+    func createMenu()->NSMenu {
+        let menu = NSMenu()
+        
+        let replaceItem = NSMenuItem(title: "Pick Images...", action: nil, keyEquivalent: "")
+        let imagesSubmenu = NSMenu()
+        imagesSubmenu.addItem(withTitle: "Light", action: #selector(self.chooseLight), keyEquivalent: "")
+        imagesSubmenu.addItem(withTitle: "Dark", action: #selector(self.chooseDark), keyEquivalent: "")
+        replaceItem.submenu = imagesSubmenu
+        
+        menu.addItem(replaceItem)
+        menu.addItem(NSMenuItem.separator())
+        let fadeItem = NSMenuItem(title: "Fade Wallpaper", action: #selector(self.toggleFade), keyEquivalent: "")
+        if(UserDefaults.standard.bool(forKey: "fadeWallpaper")) {
+            fadeItem.state = .on
+        }
+        let openAtLoginItem = NSMenuItem(title: "Open At Login", action: #selector(self.openAtLogin), keyEquivalent: "")
+        if(UserDefaults.standard.bool(forKey: "openAtLogin")) {
+            openAtLoginItem.state = .on
+        }
+        menu.addItem(fadeItem); menu.addItem(openAtLoginItem)
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(withTitle: "Open Wallpaper Folder", action: #selector(self.openFolder), keyEquivalent: "")
+        menu.addItem(withTitle: "About", action: #selector(self.showAbout), keyEquivalent: "")
+        menu.addItem(withTitle: "Quit", action: #selector(self.quit), keyEquivalent: "")
+        return menu
+    }
+    
+    @objc func toggleFade() {
+        UserDefaults.standard.set(!UserDefaults.standard.bool(forKey: "fadeWallpaper"), forKey: "fadeWallpaper")
+        self.statusItem.menu = createMenu()
+    }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -67,21 +103,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         checkSuffResources(showAlert: true)
         
-        let menu = NSMenu()
         
-        let replaceItem = NSMenuItem(title: "Pick Images...", action: nil, keyEquivalent: "")
-        let imagesSubmenu = NSMenu()
-        imagesSubmenu.addItem(withTitle: "Light", action: #selector(self.chooseLight), keyEquivalent: "")
-        imagesSubmenu.addItem(withTitle: "Dark", action: #selector(self.chooseDark), keyEquivalent: "")
-        replaceItem.submenu = imagesSubmenu
-        
-        menu.addItem(replaceItem)
-        menu.addItem(withTitle: "Open At Login", action: #selector(self.openAtLogin), keyEquivalent: "")
-        menu.addItem(NSMenuItem.separator())
-        menu.addItem(withTitle: "Open Wallpaper Folder", action: #selector(self.openFolder), keyEquivalent: "")
-        menu.addItem(withTitle: "About", action: #selector(self.showAbout), keyEquivalent: "")
-        menu.addItem(withTitle: "Quit", action: #selector(self.quit), keyEquivalent: "")
-        statusItem.menu = menu
+        statusItem.menu = createMenu()
         
         DistributedNotificationCenter.default().addObserver(self, selector: #selector(self.interfaceModeChanged), name: NSNotification.Name(rawValue: "AppleInterfaceThemeChangedNotification"), object: nil)
         NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.setImg), name: NSWorkspace.activeSpaceDidChangeNotification, object: nil)
@@ -210,17 +233,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func openAtLogin() {
-        let alert = NSAlert()
-        alert.icon = NSImage(named: "AppIcon")
-        alert.messageText = "To open at login, go to:\n\nSystem Preferences > Users & Groups > Your Name > Login Items\n\nPress + and add Dark Mode Wallpaper."
-        alert.runModal()
-    }
-    
-    @objc func howToUse() {
-        let alert = NSAlert()
-        alert.icon = NSImage(named: "AppIcon")
-        alert.messageText = "Open the folder in the app's menu and put in 2 JPEG images:\n\ndark.jpg and light.jpg\n\nThe app will use these images as the dark and light wallpapers."
-        alert.runModal()
+        if(UserDefaults.standard.bool(forKey: "openAtLogin")) {
+            if(!SMLoginItemSetEnabled("justinhamilton.Dark-Mode-Wallpaper-AutoLaunch" as CFString, false)) {
+                print("Could not set login item")
+            } else {
+                UserDefaults.standard.set(false, forKey: "openAtLogin")
+            }
+        } else {
+            if(!SMLoginItemSetEnabled("justinhamilton.Dark-Mode-Wallpaper-AutoLaunch" as CFString, true)) {
+                print("Could not set login item")
+            } else {
+                UserDefaults.standard.set(true, forKey: "openAtLogin")
+            }
+        }
+        self.statusItem.menu = createMenu()
     }
     
     @objc func quit() {
@@ -228,6 +254,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func showAbout() {
+        window.level = .floating
         window.makeKeyAndOrderFront(self)
     }
     
@@ -239,6 +266,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         do {
             let oldExt = self.currentExt
             if(FileManager.default.fileExists(atPath: rawDataURL.appendingPathComponent("current\(oldRand).\(oldExt)", isDirectory: false)!.relativePath)) {
+                self.oldImage = NSImage(data:FileManager.default.contents(atPath: rawDataURL.appendingPathComponent("current\(oldRand).\(oldExt)")!.path)!)
                 try FileManager.default.removeItem(at: rawDataURL.appendingPathComponent("current\(oldRand).\(oldExt)", isDirectory: false)!)
             }
             
@@ -269,18 +297,53 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let rand = UserDefaults.standard.integer(forKey: "randInt")
         
-        do {
-            let imgurl = NSURL.fileURL(withPath: rawDataURL.appendingPathComponent("current\(rand).\(self.currentExt)")!.relativePath)
-            UserDefaults.standard.set(self.currentExt, forKey: "currentExtension")
-            
-            try screens.forEach({(s) in
-                if(workspace.desktopImageURL(for: s) != imgurl) {
-                    try workspace.setDesktopImageURL(imgurl as URL, for: s, options: [.allowClipping: true])
+        let imgurl = NSURL.fileURL(withPath: rawDataURL.appendingPathComponent("current\(rand).\(self.currentExt)")!.relativePath)
+        UserDefaults.standard.set(self.currentExt, forKey: "currentExtension")
+        
+        screens.forEach({(s) in
+            if(workspace.desktopImageURL(for: s) != imgurl) {
+                if(UserDefaults.standard.bool(forKey: "fadeWallpaper")) {
+                    //fade overlay code adapted from Ryan Thomson's Nightfall (https://github.com/r-thomson/Nightfall)
+                    let fadeDelay = 1.0
+                    let fadeDuration = 0.25
+                    let overlay = NSWindow(contentRect: s.frame, styleMask: .borderless, backing: .buffered, defer: false)
+                    overlay.backgroundColor = .clear
+                    overlay.collectionBehavior = [.ignoresCycle, .stationary]
+                    overlay.ignoresMouseEvents = true
+                    //This draws the window under the desktop icons, so it doesn't cover them when fading
+                    overlay.level = NSWindow.Level(rawValue: NSWindow.Level.RawValue(CGWindowLevelForKey(CGWindowLevelKey.desktopWindow)))
+                    overlay.contentView?.wantsLayer = true
+                    //Since we're only fading the Desktop wallpaper, we don't need to take a screenshot! We just take the original picture and crop it to the same aspect ratio as the wallpaper.
+                    overlay.contentView?.layer!.contentsGravity = CALayerContentsGravity.resizeAspectFill
+                    overlay.contentView?.layer!.contents = self.oldImage
+                    overlay.orderBack(overlay)
+                    
+                    //I'm not sure why delaying the actual setting makes this work better, but it does
+                    DispatchQueue.main.asyncAfter(deadline: .now()+Double(0.1)) {[workspace] in
+                        do {
+                            try workspace.setDesktopImageURL(imgurl as URL, for: s, options: [.allowClipping: true])
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now()+fadeDelay) {[overlay] in
+                        NSAnimationContext.runAnimationGroup({context in
+                            context.duration = Double(fadeDuration)
+                            overlay.animator().alphaValue = 0.0
+                        }, completionHandler: {
+                            overlay.orderOut(overlay)
+                        })
+                    }
+                } else {
+                    do {
+                        try workspace.setDesktopImageURL(imgurl as URL, for: s, options: [.allowClipping: true])
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
-            })
-        } catch {
-            print(error.localizedDescription)
-        }
+            }
+        })
     }
     
     @objc func interfaceModeChanged() {
