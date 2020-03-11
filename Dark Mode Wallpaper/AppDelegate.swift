@@ -18,9 +18,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var rawDataURL: NSURL!
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     
-    let lightIcon = NSImage(named: "lightIcon")
-    let darkIcon = NSImage(named: "darkIcon")
-    
     var oldImage: NSImage!
     var newImage: NSImage!
     
@@ -45,16 +42,219 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if(UserDefaults.standard.bool(forKey: "fadeWallpaper")) {
             fadeItem.state = .on
         }
+        let fadeDelaySubmenuItem = NSMenuItem(title: "Fade Delay...", action: nil, keyEquivalent: "")
+        if(!UserDefaults.standard.bool(forKey: "fadeWallpaper")) {
+            fadeDelaySubmenuItem.isEnabled = false
+        }
+        
+        let fadeDelaySubmenu = NSMenu()
+        let lightMenuItem = NSMenuItem(title: "Light...", action: nil, keyEquivalent: "")
+        
+        let lightFadeDelayMenu = NSMenu()
+        let lightItem1 = NSMenuItem(title: "0.5s", action: #selector(self.setLightFadeDelay(_:)), keyEquivalent: "")
+        let lightItem2 = NSMenuItem(title: "0.75s", action: #selector(self.setLightFadeDelay(_:)), keyEquivalent: "")
+        let lightItem3 = NSMenuItem(title: "1s", action: #selector(self.setLightFadeDelay(_:)), keyEquivalent: "")
+        let lightItem4 = NSMenuItem(title: "1.25s", action: #selector(self.setLightFadeDelay(_:)), keyEquivalent: "")
+        let lightItem5 = NSMenuItem(title: "1.5s", action: #selector(self.setLightFadeDelay(_:)), keyEquivalent: "")
+        let lightItem6 = NSMenuItem(title: "Custom...", action: #selector(self.setLightFadeDelay(_:)), keyEquivalent: "")
+        switch(UserDefaults.standard.double(forKey: "lightFadeDelay")) {
+        case 0.5:
+            lightItem1.state = .on
+            break
+        case 0.75:
+            lightItem2.state = .on
+            break
+        case 1.0:
+            lightItem3.state = .on
+            break
+        case 1.25:
+            lightItem4.state = .on
+            break
+        case 1.5:
+            lightItem5.state = .on
+            break
+        default:
+            lightItem6.state = .on
+            lightItem6.title = "Custom (\(UserDefaults.standard.double(forKey: "lightFadeDelay"))s)..."
+            break
+        }
+        
+        lightFadeDelayMenu.addItem(lightItem1)
+        lightFadeDelayMenu.addItem(lightItem2)
+        lightFadeDelayMenu.addItem(lightItem3)
+        lightFadeDelayMenu.addItem(lightItem4)
+        lightFadeDelayMenu.addItem(lightItem5)
+        lightFadeDelayMenu.addItem(lightItem6)
+        lightMenuItem.submenu = lightFadeDelayMenu
+        
+        let darkMenuItem = NSMenuItem(title: "Dark...", action: nil, keyEquivalent: "")
+        let darkFadeDelayMenu = NSMenu()
+        let darkItem1 = NSMenuItem(title: "0.5s", action: #selector(self.setDarkFadeDelay(_:)), keyEquivalent: "")
+        let darkItem2 = NSMenuItem(title: "0.75s", action: #selector(self.setDarkFadeDelay(_:)), keyEquivalent: "")
+        let darkItem3 = NSMenuItem(title: "1s", action: #selector(self.setDarkFadeDelay(_:)), keyEquivalent: "")
+        let darkItem4 = NSMenuItem(title: "1.25s", action: #selector(self.setDarkFadeDelay(_:)), keyEquivalent: "")
+        let darkItem5 = NSMenuItem(title: "1.5s", action: #selector(self.setDarkFadeDelay(_:)), keyEquivalent: "")
+        let darkItem6 = NSMenuItem(title: "Custom...", action: #selector(self.setDarkFadeDelay(_:)), keyEquivalent: "")
+        switch(UserDefaults.standard.double(forKey: "darkFadeDelay")) {
+        case 0.5:
+            darkItem1.state = .on
+            break
+        case 0.75:
+            darkItem2.state = .on
+            break
+        case 1.0:
+            darkItem3.state = .on
+            break
+        case 1.25:
+            darkItem4.state = .on
+            break
+        case 1.5:
+            darkItem5.state = .on
+            break
+        default:
+            darkItem6.state = .on
+            darkItem6.title = "Custom (\(UserDefaults.standard.double(forKey: "darkFadeDelay"))s)..."
+            break
+        }
+        darkFadeDelayMenu.addItem(darkItem1)
+        darkFadeDelayMenu.addItem(darkItem2)
+        darkFadeDelayMenu.addItem(darkItem3)
+        darkFadeDelayMenu.addItem(darkItem4)
+        darkFadeDelayMenu.addItem(darkItem5)
+        darkFadeDelayMenu.addItem(darkItem6)
+        
+        darkMenuItem.submenu = darkFadeDelayMenu
+        
+        fadeDelaySubmenu.addItem(withTitle: "Why?", action: #selector(self.fadeDelayExplanation), keyEquivalent: "")
+        fadeDelaySubmenu.addItem(NSMenuItem.separator())
+        fadeDelaySubmenu.addItem(lightMenuItem)
+        fadeDelaySubmenu.addItem(darkMenuItem)
+        
+        fadeDelaySubmenuItem.submenu = fadeDelaySubmenu
+        
         let openAtLoginItem = NSMenuItem(title: "Open At Login", action: #selector(self.openAtLogin), keyEquivalent: "")
         if(UserDefaults.standard.bool(forKey: "openAtLogin")) {
             openAtLoginItem.state = .on
         }
-        menu.addItem(fadeItem); menu.addItem(openAtLoginItem)
+        menu.addItem(fadeItem); menu.addItem(fadeDelaySubmenuItem); menu.addItem(openAtLoginItem)
         menu.addItem(NSMenuItem.separator())
         menu.addItem(withTitle: "Open Wallpaper Folder", action: #selector(self.openFolder), keyEquivalent: "")
         menu.addItem(withTitle: "About", action: #selector(self.showAbout), keyEquivalent: "")
         menu.addItem(withTitle: "Quit", action: #selector(self.quit), keyEquivalent: "")
         return menu
+    }
+    
+    @objc func setLightFadeDelay(_ sender: Any) {
+        switch((sender as! NSMenuItem).title) {
+        case "0.5s":
+            UserDefaults.standard.set(Double(0.5), forKey: "lightFadeDelay")
+            break
+        case "0.75s":
+            UserDefaults.standard.set(Double(0.75), forKey: "lightFadeDelay")
+            break
+        case "1s":
+            UserDefaults.standard.set(Double(1.0), forKey: "lightFadeDelay")
+            break
+        case "1.25s":
+            UserDefaults.standard.set(Double(1.25), forKey: "lightFadeDelay")
+            break
+        case "1.5s":
+            UserDefaults.standard.set(Double(1.5), forKey: "lightFadeDelay")
+            break
+        default:
+            var isDouble = false
+            while(!isDouble) {
+                let alert = NSAlert()
+                alert.messageText = "Enter a Custom Fade Delay (In Seconds)"
+                let inputTextView = NSTextField(frame: NSRect(x: 0,y: 0,width: 250,height: 20))
+                alert.accessoryView = inputTextView
+                alert.addButton(withTitle: "OK")
+                alert.addButton(withTitle: "Cancel")
+                if(alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn) {
+                    if(Double(inputTextView.stringValue) != nil) {
+                        if(Double(Int(inputTextView.stringValue) ?? 0) < 0) {
+                            let nopeAlert = NSAlert()
+                            nopeAlert.messageText = "Not Positive"
+                            nopeAlert.informativeText = "Please enter a number above 0."
+                            nopeAlert.runModal()
+                        } else {
+                            UserDefaults.standard.set(Double(inputTextView.stringValue), forKey: "lightFadeDelay")
+                            isDouble = true
+                        }
+                    } else {
+                        let nopeAlert = NSAlert()
+                        nopeAlert.messageText = "Not a Number"
+                        nopeAlert.informativeText = "Please enter a number."
+                        nopeAlert.runModal()
+                    }
+                } else {
+                    break
+                }
+            }
+            break
+        }
+        self.statusItem.menu = createMenu()
+    }
+    
+    @objc func setDarkFadeDelay(_ sender: Any) {
+        switch((sender as! NSMenuItem).title) {
+        case "0.5s":
+            UserDefaults.standard.set(Double(0.5), forKey: "darkFadeDelay")
+            break
+        case "0.75s":
+            UserDefaults.standard.set(Double(0.75), forKey: "darkFadeDelay")
+            break
+        case "1s":
+            UserDefaults.standard.set(Double(1.0), forKey: "darkFadeDelay")
+            break
+        case "1.25s":
+            UserDefaults.standard.set(Double(1.25), forKey: "darkFadeDelay")
+            break
+        case "1.5s":
+            UserDefaults.standard.set(Double(1.5), forKey: "darkFadeDelay")
+            break
+        default:
+            var isDouble = false
+            while(!isDouble) {
+                let alert = NSAlert()
+                alert.messageText = "Enter a Custom Fade Delay (In Seconds)"
+                let inputTextView = NSTextField(frame: NSRect(x: 0,y: 0,width: 250,height: 20))
+                alert.accessoryView = inputTextView
+                alert.addButton(withTitle: "OK")
+                alert.addButton(withTitle: "Cancel")
+                if(alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn) {
+                    if(Double(inputTextView.stringValue) != nil) {
+                        if(Double(Int(inputTextView.stringValue) ?? 0) < 0) {
+                            let nopeAlert = NSAlert()
+                            nopeAlert.messageText = "Not Positive"
+                            nopeAlert.informativeText = "Please enter a number above 0."
+                            nopeAlert.runModal()
+                        } else {
+                            UserDefaults.standard.set(Double(inputTextView.stringValue), forKey: "darkFadeDelay")
+                            isDouble = true
+                        }
+                    } else {
+                        let nopeAlert = NSAlert()
+                        nopeAlert.messageText = "Not a Number"
+                        nopeAlert.informativeText = "Please enter a number."
+                        nopeAlert.runModal()
+                    }
+                } else {
+                    break
+                }
+            }
+            break
+        }
+        self.statusItem.menu = createMenu()
+    }
+    
+    @objc func fadeDelayExplanation() {
+        let alert = NSAlert()
+        alert.icon = NSImage(named: "AppIcon")
+        alert.messageText = "Why mess with the fade delay?"
+        alert.informativeText = "When setting the wallpaper, there's a delay between when the image URL is set, and when the image actually appears on the desktop. I have no way of determining this delay due to macOS limitations.\n\nThere are about a million different factors that contribute to the delay, including the size of the image and the apps in the foreground (Xcode and Firefox take especially long to switch appearances).\n\nYou can adjust the delay for each image if there are any visual glitches or if it's a bit too long for your liking. Play around a bit and see which option is best for your images.\n\nThe light delay adjusts the delay when switching from dark to light mode, and the dark delay adjusts the delay when switching from light to dark mode."
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
     }
     
     @objc func toggleFade() {
@@ -64,7 +264,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        statusItem.button!.image = lightIcon
+        statusItem.button!.image = NSImage(named: "lightIcon")
+        
+        if(UserDefaults.standard.object(forKey: "lightFadeDelay") == nil) {
+            UserDefaults.standard.set(Double(1.0), forKey: "lightFadeDelay")
+        }
+        
+        if(UserDefaults.standard.object(forKey: "darkFadeDelay") == nil) {
+            UserDefaults.standard.set(Double(1.0), forKey: "darkFadeDelay")
+        }
         
         do {
             if(!FileManager.default.fileExists(atPath: supportURL[0].appendingPathComponent("DarkModeWallpaper/wallpaper-images", isDirectory: true).relativePath)) {
@@ -276,14 +484,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 
                 self.currentExt = self.darkExt
                 
-                statusItem.button!.image = darkIcon
+                statusItem.button!.image = NSImage(named: "darkIcon")
             } else if(NSApp.effectiveAppearance.name.rawValue == "NSAppearanceNameAqua") {
                 let imgurl = NSURL.fileURL(withPath: picURL.appendingPathComponent("light.\(self.lightExt)")!.relativePath)
                 try FileManager.default.copyItem(at: imgurl, to: rawDataURL.appendingPathComponent("current\(rand).\(self.lightExt)", isDirectory: false)!)
                 
                 self.currentExt = self.lightExt
                 
-                statusItem.button!.image = lightIcon
+                statusItem.button!.image = NSImage(named: "lightIcon")
             }
             self.setImg()
         } catch {
@@ -304,7 +512,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if(workspace.desktopImageURL(for: s) != imgurl) {
                 if(UserDefaults.standard.bool(forKey: "fadeWallpaper")) {
                     //fade overlay code adapted from Ryan Thomson's Nightfall (https://github.com/r-thomson/Nightfall)
-                    let fadeDelay = 1.0
                     let fadeDuration = 0.25
                     let overlay = NSWindow(contentRect: s.frame, styleMask: .borderless, backing: .buffered, defer: false)
                     overlay.backgroundColor = .clear
@@ -327,12 +534,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         }
                     }
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now()+fadeDelay) {[overlay] in
+                    var delay = 1.0
+                    
+                    if(NSApp.effectiveAppearance.name.rawValue == "NSAppearanceNameDarkAqua") {
+                        delay = UserDefaults.standard.double(forKey: "darkFadeDelay")
+                    } else if(NSApp.effectiveAppearance.name.rawValue == "NSAppearanceNameAqua") {
+                        delay = UserDefaults.standard.double(forKey: "lightFadeDelay")
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now()+delay) {[] in
                         NSAnimationContext.runAnimationGroup({context in
                             context.duration = Double(fadeDuration)
                             overlay.animator().alphaValue = 0.0
                         }, completionHandler: {
                             overlay.orderOut(overlay)
+                            self.oldImage = nil
+                            self.newImage = nil
+                            
                         })
                     }
                 } else {
