@@ -10,8 +10,6 @@ Made with love by [Justin Hamilton](https://www.jwhamilton.co/).
 
 Get it for free on the [Mac App Store](https://apps.apple.com/us/app/dark-mode-wallpaper-switcher/id1488154568).
 
-*NOTE*: The current version on the App Store is v1.1. v1.2 will be available to download soon.
-
 For App Store reasons, you can view the privacy policy [here](https://github.com/jwhamilton99/dark-mode-wallpaper/blob/master/privacypolicy.md).
 
 A few caveats:
