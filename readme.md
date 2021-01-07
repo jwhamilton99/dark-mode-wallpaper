@@ -18,13 +18,14 @@ A few caveats:
 * It's a known bug that when updating the wallpaper using the same file URL that points to a different image, it doesn't use the updated image. I've created a workaround for this, and I wrote about it [here](https://medium.com/@jwhamilton99/updating-wallpaper-urls-in-swift-6b014792e8b).
 * When using the fade animation, there's a delay between when the wallpaper URL is set and when the wallpaper actually appears on the desktop. I have no way of calculating this, so I added the ability to set each image's delay.
 
-## v1.2 Changelog
+## v1.3.1 Changelog
 
-New:
-* Added proper Open At Login support
-* Added an optional fade transition when changing the wallpaper
-* Added the ability to adjust the fade delay for each image
+Dark Mode Wallpaper Switcher is now compiled for both Intel and Apple Silicon processors, and will run natively on both. This update also includes improvements for Big Sur.
+
+Added:
+- Redesigned the icon to fit better in Big Sur
+- Added native Apple Silicon support
 
 Changed:
-
-* Removed Open At Login alert since it's handled automatically
+- Redesigned the About window
+- Removed placeholder assets that were left in the app

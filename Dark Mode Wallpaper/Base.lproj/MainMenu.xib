@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -678,87 +679,97 @@
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="140" y="154"/>
+            <point key="canvasLocation" x="108" y="147"/>
         </menu>
         <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="250" height="300"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1175"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="250" height="271"/>
+                <rect key="frame" x="0.0" y="0.0" width="379" height="160"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bx0-e5-l5b">
-                        <rect key="frame" x="20" y="131" width="210" height="120"/>
+                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jNK-by-ZEb">
+                        <rect key="frame" x="160" y="38" width="199" height="85"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LmQ-gP-guy">
+                                <rect key="frame" x="-2" y="69" width="203" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Dark Mode Wallpaper Switcher" id="QX2-Dp-yWv">
+                                    <font key="font" metaFont="systemSemibold" size="13"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Det-OS-bCq">
+                                <rect key="frame" x="-2" y="45" width="121" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="By Justin Hamilton" id="1RR-uJ-s07">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WGG-08-Mcy">
+                                <rect key="frame" x="-2" y="21" width="92" height="16"/>
+                                <gestureRecognizers>
+                                    <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="efW-BU-9V2">
+                                        <connections>
+                                            <action selector="goToWebsite:" target="Voe-Tx-rLC" id="yQ3-0b-MXf"/>
+                                        </connections>
+                                    </clickGestureRecognizer>
+                                </gestureRecognizers>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="jwhamilton.co" id="J61-m1-r0W">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="linkColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lO2-Am-NsG">
+                                <rect key="frame" x="-2" y="0.0" width="35" height="13"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="v1.3.1" id="pRH-HR-EKb">
+                                    <font key="font" metaFont="system" size="10"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <visibilityPriorities>
+                            <integer value="1000"/>
+                            <integer value="1000"/>
+                            <integer value="1000"/>
+                            <integer value="1000"/>
+                        </visibilityPriorities>
+                        <customSpacing>
+                            <real value="3.4028234663852886e+38"/>
+                            <real value="3.4028234663852886e+38"/>
+                            <real value="3.4028234663852886e+38"/>
+                            <real value="3.4028234663852886e+38"/>
+                        </customSpacing>
+                    </stackView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O3a-7z-Pga">
+                        <rect key="frame" x="20" y="20" width="120" height="120"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="120" id="2tG-pg-1yC"/>
+                            <constraint firstAttribute="width" constant="120" id="LbH-5y-RHF"/>
+                            <constraint firstAttribute="height" constant="120" id="W66-07-1EY"/>
                         </constraints>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="aboutIcon" id="FeY-qq-yUf"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="aboutIcon" id="0j1-fV-0cC"/>
                     </imageView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LmQ-gP-guy">
-                        <rect key="frame" x="18" y="95" width="214" height="16"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Dark Mode Wallpaper Switcher" id="QX2-Dp-yWv">
-                            <font key="font" metaFont="systemSemibold" size="13"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Det-OS-bCq">
-                        <rect key="frame" x="18" y="74" width="214" height="16"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="By Justin Hamilton" id="1RR-uJ-s07">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lO2-Am-NsG">
-                        <rect key="frame" x="18" y="20" width="214" height="13"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="v1.2" id="pRH-HR-EKb">
-                            <font key="font" metaFont="system" size="10"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WGG-08-Mcy">
-                        <rect key="frame" x="18" y="38" width="214" height="16"/>
-                        <gestureRecognizers>
-                            <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="efW-BU-9V2">
-                                <connections>
-                                    <action selector="goToWebsite:" target="Voe-Tx-rLC" id="yQ3-0b-MXf"/>
-                                </connections>
-                            </clickGestureRecognizer>
-                        </gestureRecognizers>
-                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="jwhamilton.co" id="J61-m1-r0W">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="linkColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="LmQ-gP-guy" firstAttribute="top" secondItem="bx0-e5-l5b" secondAttribute="bottom" constant="20" id="3HU-Ee-CjI"/>
-                    <constraint firstItem="bx0-e5-l5b" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="3aD-2k-Kvd"/>
-                    <constraint firstItem="lO2-Am-NsG" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="3j4-4D-2RP"/>
-                    <constraint firstAttribute="trailing" secondItem="lO2-Am-NsG" secondAttribute="trailing" constant="20" id="Ct6-yy-yOY"/>
-                    <constraint firstAttribute="trailing" secondItem="Det-OS-bCq" secondAttribute="trailing" constant="20" id="Dcj-8M-hNz"/>
-                    <constraint firstAttribute="trailing" secondItem="WGG-08-Mcy" secondAttribute="trailing" constant="20" id="GfV-Na-p1z"/>
-                    <constraint firstItem="Det-OS-bCq" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="RPq-rI-w82"/>
-                    <constraint firstItem="LmQ-gP-guy" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="X2p-bm-Ck4"/>
-                    <constraint firstAttribute="trailing" secondItem="bx0-e5-l5b" secondAttribute="trailing" constant="20" id="Z2O-64-EgH"/>
-                    <constraint firstItem="WGG-08-Mcy" firstAttribute="top" secondItem="Det-OS-bCq" secondAttribute="bottom" constant="20" id="bwN-AQ-k50"/>
-                    <constraint firstItem="WGG-08-Mcy" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="idW-UI-Yd8"/>
-                    <constraint firstItem="bx0-e5-l5b" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="jvO-fP-AA6"/>
-                    <constraint firstAttribute="bottom" secondItem="lO2-Am-NsG" secondAttribute="bottom" constant="20" id="q5b-EI-rMh"/>
-                    <constraint firstAttribute="trailing" secondItem="LmQ-gP-guy" secondAttribute="trailing" constant="20" id="qPd-Ow-IUJ"/>
-                    <constraint firstItem="Det-OS-bCq" firstAttribute="top" secondItem="LmQ-gP-guy" secondAttribute="bottom" constant="5" id="tfx-E0-48h"/>
-                    <constraint firstItem="lO2-Am-NsG" firstAttribute="top" secondItem="WGG-08-Mcy" secondAttribute="bottom" constant="5" id="zV7-mi-wD3"/>
+                    <constraint firstItem="jNK-by-ZEb" firstAttribute="leading" secondItem="O3a-7z-Pga" secondAttribute="trailing" constant="20" id="2hh-Gg-0B4"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="jNK-by-ZEb" secondAttribute="bottom" constant="20" id="3UE-4i-ncK"/>
+                    <constraint firstItem="O3a-7z-Pga" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="3Ud-FF-pSg"/>
+                    <constraint firstItem="O3a-7z-Pga" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="3kj-H3-k4o"/>
+                    <constraint firstAttribute="trailing" secondItem="jNK-by-ZEb" secondAttribute="trailing" constant="20" id="BO0-9U-wgW"/>
+                    <constraint firstItem="jNK-by-ZEb" firstAttribute="centerY" secondItem="EiT-Mj-1SZ" secondAttribute="centerY" id="KEm-9E-JIn"/>
+                    <constraint firstItem="jNK-by-ZEb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="b9U-JO-0Tj"/>
+                    <constraint firstAttribute="bottom" secondItem="O3a-7z-Pga" secondAttribute="bottom" constant="20" id="slA-Xn-N3q"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="115" y="432"/>
+            <point key="canvasLocation" x="115" y="431.5"/>
         </window>
     </objects>
     <resources>
-        <image name="aboutIcon" width="128" height="128"/>
+        <image name="aboutIcon" width="512" height="512"/>
     </resources>
 </document>

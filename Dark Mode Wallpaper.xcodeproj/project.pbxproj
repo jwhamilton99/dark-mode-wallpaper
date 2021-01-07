@@ -14,7 +14,6 @@
 		4399B2D924100F2900C80A8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4399B2D824100F2900C80A8B /* Assets.xcassets */; };
 		4399B2DC24100F2900C80A8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4399B2DA24100F2900C80A8B /* Main.storyboard */; };
 		4399B2E4241010C700C80A8B /* Dark Mode Wallpaper AutoLaunch.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4399B2D224100F2600C80A8B /* Dark Mode Wallpaper AutoLaunch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		4399B2E7241010E000C80A8B /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4399B2E6241010E000C80A8B /* ServiceManagement.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,7 +50,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4399B2E7241010E000C80A8B /* ServiceManagement.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +159,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Justin Hamilton";
 				TargetAttributes = {
 					434761AA237B799C00A9CD80 = {
@@ -277,6 +275,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -337,6 +336,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -372,7 +372,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 2W9EC9X76L;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Dark Mode Wallpaper/Info.plist";
@@ -380,7 +380,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "justinhamilton.Dark-Mode-Wallpaper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -395,7 +395,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 2W9EC9X76L;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Dark Mode Wallpaper/Info.plist";
@@ -403,7 +403,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "justinhamilton.Dark-Mode-Wallpaper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -418,6 +418,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 2W9EC9X76L;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Dark Mode Wallpaper AutoLaunch/Info.plist";
@@ -425,7 +426,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "justinhamilton.Dark-Mode-Wallpaper-AutoLaunch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -441,6 +442,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 2W9EC9X76L;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Dark Mode Wallpaper AutoLaunch/Info.plist";
@@ -448,7 +450,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "justinhamilton.Dark-Mode-Wallpaper-AutoLaunch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
